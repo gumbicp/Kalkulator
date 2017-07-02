@@ -25,6 +25,8 @@ namespace ConsoleApplication1 {
 			second = 0;
 			result = 0;
 			F_OPERATION = false;
+			
+
 		}
 
 	protected:
@@ -105,6 +107,8 @@ namespace ConsoleApplication1 {
 		System::Double second;
 		System::Double result;
 		System::Boolean F_OPERATION;
+		Operations_e ope;
+		System::Int16 whatOpe{ 0 };
 
 		/// </summary>
 		System::ComponentModel::Container ^components;
@@ -454,6 +458,7 @@ private: System::Void handler_numeric(System::String^ toPut) {
 	else
 	{
 		label_screen->Text = toPut;
+		second = Convert::ToDouble(toPut);
 	}
 }
 /**
@@ -541,12 +546,13 @@ private: System::Void but_point_Click(System::Object^  sender, System::EventArgs
 *   
 */
 private: System::Void but_plus_Click(System::Object^  sender, System::EventArgs^  e) {
+	whatOpe = PLUS;
 	F_OPERATION = true;
 	// first operation
 	if(result == 0){ 
 		first = Convert::ToDouble(label_screen->Text);
 		result += first;
-		label_screen->Text = "0";
+		//label_screen->Text = "0";
 	}
 	// + .. + .. + operation
 	else {
@@ -558,7 +564,16 @@ private: System::Void but_plus_Click(System::Object^  sender, System::EventArgs^
 *	Button . Click event. Put . in label_screen.
 */
 private: System::Void but_equale_Click(System::Object^  sender, System::EventArgs^  e) {
-	//TODO: 
+	switch (ope)
+	{
+	case PLUS:
+		result += second;
+		break;
+	default:
+		break;
+	}
+	
+	label_screen->Text = Convert::ToString(result); 
 }
 };
 }
